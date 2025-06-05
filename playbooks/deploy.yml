@@ -1,14 +1,14 @@
 ---
-- hosts: webshell
-  tasks:
-    - name: Prepare Sopnodes 
-      include_role:
-        name: pos
-      vars:
-        node: "{{ item }}"
-      loop: "{{ groups['sopnodes'] }}"
-      loop_control:
-        label: "{{ item }}"
+# - hosts: webshell
+#   tasks:
+#     - name: Prepare Sopnodes 
+#       include_role:
+#         name: pos
+#       vars:
+#         node: "{{ item }}"
+#       loop: "{{ groups['sopnodes'] }}"
+#       loop_control:
+#         label: "{{ item }}"
 
 - name: Setup Sopnodes
   hosts: sopnodes
@@ -26,37 +26,37 @@
     - role: setup/cni
     - role: setup/storage
 
-- name: Join Kubernetes Cluster on Workers
-  hosts: k8s_workers
-  become: true
-  roles:
-    - role: setup/k8s/cluster_join
+# - name: Join Kubernetes Cluster on Workers
+#   hosts: k8s_workers
+#   become: true
+#   roles:
+#     - role: setup/k8s/cluster_join
 
 - name: Deploy Open5gs Core
   hosts: core_node
   roles:
     - role: 5g/core
 
-- name: Cleanup R2Lab
-  hosts: faraday
-  roles:
-    - role: r2lab/cleanup
+# - name: Cleanup R2Lab
+#   hosts: faraday
+#   roles:
+#     - role: r2lab/cleanup
 
-- hosts: faraday
-  tasks:
-    - name: Setup UEs on R2Lab
-      include_role:
-        name: r2lab/ue/setup
-      vars:
-        ue: "{{ item }}"
-      loop: "{{ groups['qhats'] }}"
-      loop_control:
-        label: "{{ item }}"
+# - hosts: faraday
+#   tasks:
+#     - name: Setup UEs on R2Lab
+#       include_role:
+#         name: r2lab/ue/setup
+#       vars:
+#         ue: "{{ item }}"
+#       loop: "{{ groups['qhats'] }}"
+#       loop_control:
+#         label: "{{ item }}"
 
-- name: Power ON RRU on R2Lab
-  hosts: faraday
-  roles:
-    - role: r2lab/rru
+# - name: Power ON RRU on R2Lab
+#   hosts: faraday
+#   roles:
+#     - role: r2lab/rru
 
 - name: Deploy OAI RAN
   hosts: ran_node
@@ -65,16 +65,16 @@
     - role: setup/netplan
     - role: 5g/ran
 
-- hosts: faraday
-  tasks:
-    - name: Connect UEs on R2Lab to 5g network
-      include_role:
-        name: r2lab/ue/connect
-      vars:
-        ue: "{{ item }}"
-      loop: "{{ groups['qhats'] }}"
-      loop_control:
-        label: "{{ item }}"
+# - hosts: faraday
+#   tasks:
+#     - name: Connect UEs on R2Lab to 5g network
+#       include_role:
+#         name: r2lab/ue/connect
+#       vars:
+#         ue: "{{ item }}"
+#       loop: "{{ groups['qhats'] }}"
+#       loop_control:
+#         label: "{{ item }}"
 
 - name: Deploy 5G-Monarch for monitoring
   hosts: monitor_node

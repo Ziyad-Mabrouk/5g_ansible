@@ -1,4 +1,4 @@
 ---
 - name: Start UE "{{ ue }}" via jump host
-  shell: ssh root@{{ ue }} 'start.sh -F "{{ dnn }}"'
+  shell: ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=5 -n root@{{ ue }} 'start.sh -F "{{ dnn }}"'
   delegate_to: faraday.inria.fr
