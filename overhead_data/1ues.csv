@@ -1,0 +1,10 @@
+UE_Count,Duration,Container,Avg_CPU(millicores),Avg_MEM(Mi),Disk_Usage(Mi)
+1,30,oai-gnb,2039,910,1116
+1,30,metrics-parser,3,13,1116
+1,30,oai-flexric,1,1,1116
+1,60,oai-gnb,2072,911,1147
+1,60,metrics-parser,3,13,1147
+1,60,oai-flexric,1,1,1147
+1,120,oai-gnb,2071,911,1208
+1,120,metrics-parser,3,13,1208
+1,120,oai-flexric,1,1,1208
